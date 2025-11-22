@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET(req: Request, { params }: { params: { code: string }}) {
 const { code } = params
-const link = await prisma.link.findFirst({ where: { short: code } as any })
+const link = await prisma.link.findUnique({ where: { code: code } })
 if (!link) return new NextResponse('Not found', { status: 404 })
 
 
